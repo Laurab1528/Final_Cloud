@@ -1,0 +1,29 @@
+---
+- hosts: bastion
+  become: yes
+  tasks:
+    - name: Actualizar paquetes
+      apt:
+        update_cache: yes
+        upgrade: yes
+    
+    - name: Instalar dependencias necesarias
+      apt:
+        name:
+          - python3
+          - python3-pip
+          - ansible
+        state: present
+
+    - name: Configurar AWS CLI
+      pip:
+        name: awscli
+        state: present
+
+    - name: Copiar clave SSH privada para acceder a otras instancias
+      copy:
+        src: "{{ playbook_dir }}/../../terraform/id_rsa"
+        dest: /home/ubuntu/.ssh/id_rsa
+        mode: '0600'
+        owner: ubuntu
+        group: ubuntu

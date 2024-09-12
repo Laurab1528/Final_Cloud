@@ -1,0 +1,23 @@
+---
+- hosts: frontend
+  become: yes
+  tasks:
+    - name: Instalar Node.js
+      apt:
+        name: nodejs
+        state: present
+
+    - name: Clonar repositorio de frontend
+      git:
+        repo: 'https://github.com/aljoveza/devops-rampup.git'
+        dest: /home/ubuntu/frontend
+        version: master
+
+    - name: Instalar dependencias del frontend
+      npm:
+        path: /home/ubuntu/frontend
+
+    - name: Construir la aplicación frontend
+      command: npm run build
+      args:
+        chdir: /home/ubuntu/frontend

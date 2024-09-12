@@ -1,0 +1,23 @@
+---
+- hosts: backend
+  become: yes
+  tasks:
+    - name: Instalar Node.js
+      apt:
+        name: nodejs
+        state: present
+
+    - name: Clonar repositorio de backend
+      git:
+        repo: 'https://github.com/aljoveza/devops-rampup.git'
+        dest: /home/ubuntu/backend
+        version: master
+
+    - name: Instalar dependencias del backend
+      npm:
+        path: /home/ubuntu/backend
+
+    - name: Configurar variables de entorno
+      template:
+        src: env.j2
+        dest: /home/ubuntu/backend/.env
