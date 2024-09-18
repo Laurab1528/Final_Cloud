@@ -4,10 +4,9 @@ variable "vpc_id" {
 }
 
 variable "private_subnet_ids" {
-  description = "IDs of private subnets"
+  description = "IDs de subredes privadas"
   type        = list(string)
 }
-
 variable "db_sg_id" {
   description = "ID del grupo de seguridad de la base de datos"
   type        = string

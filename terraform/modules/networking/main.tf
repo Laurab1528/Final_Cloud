@@ -149,8 +149,8 @@ resource "aws_security_group" "backend" {
   vpc_id      = aws_vpc.main.id
 
   ingress {
-    from_port       = 3000  // Asumiendo que tu backend corre en el puerto 3000
-    to_port         = 3000
+    from_port       = var.backend_port // Asumiendo que tu backend corre en el puerto 3000
+    to_port         = var.backend_port 
     protocol        = "tcp"
     security_groups = [aws_security_group.frontend.id]
   }

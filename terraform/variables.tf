@@ -86,17 +86,18 @@ variable "lb_internal" {
   default     = false
 }
 
-variable "lb_listener_port" {
-  description = "Puerto para el listener del balanceador de carga"
-  default     = 80
-}
-
-variable "lb_target_port" {
-  description = "Puerto para el target group del balanceador de carga"
-  default     = 80
-}
-
 variable "db_name" {
   description = "nombre de la base de datos"
   default     = "myapp_db"
+}
+variable "backend_port" {
+  description = "Port on which the load balancer is listening"
+  type        = number
+  default     = 80  // Valor por defecto para el frontend
+}
+
+variable "frontend_port" {
+  description = "Port on which the targets receive traffic"
+  type        = number
+  default     = 80  // Valor por defecto para el backend
 }

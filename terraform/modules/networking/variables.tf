@@ -22,3 +22,15 @@ variable "db_port" {
   default     = 3306  // Puedes cambiar este valor predeterminado si es necesario
 }
 
+variable "backend_port" {
+  description = "Port on which the load balancer is listening"
+  type        = number
+  default     = 80  // Valor por defecto para el frontend
+}
+
+variable "frontend_port" {
+  description = "Port on which the targets receive traffic"
+  type        = number
+  default     = 80  // Valor por defecto para el backend
+}
+

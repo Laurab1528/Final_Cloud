@@ -8,6 +8,11 @@ variable "public_subnet_ids" {
   type        = list(string)
 }
 
+variable "private_subnet_ids" {
+  description = "IDs of private subnets"
+  type        = list(string)
+}
+
 variable "frontend_instance_id" {
   description = "ID of frontend EC2 instance"
   type        = string
@@ -22,14 +27,14 @@ variable "lb_internal" {
   type        = bool
 }
 
-variable "lb_listener_port" {
+variable "backend_port" {
   description = "Port on which the load balancer is listening"
   type        = number
   default     = 80  // Valor por defecto para el frontend
 }
 
-variable "lb_target_port" {
+variable "frontend_port" {
   description = "Port on which the targets receive traffic"
   type        = number
-  default     = 3000  // Valor por defecto para el backend
+  default     = 80  // Valor por defecto para el backend
 }

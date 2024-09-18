@@ -25,11 +25,12 @@ module "load_balancer" {
   source               = "./modules/load_balancer"
   vpc_id               = module.networking.vpc_id
   public_subnet_ids    = module.networking.public_subnet_ids
+  private_subnet_ids  =  module.networking.private_subnet_ids
   frontend_instance_id = module.compute.frontend_instance_id
   backend_instance_id  = module.compute.backend_instance_id
   lb_internal          = var.lb_internal
-  lb_listener_port     = var.lb_listener_port
-  lb_target_port       = var.lb_target_port
+  backend_port     = var.backend_port
+  frontend_port       = var.frontend_port
 }
 
 module "compute" {

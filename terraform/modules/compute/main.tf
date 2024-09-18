@@ -12,6 +12,7 @@ resource "aws_instance" "bastion" {
 }
 
 resource "aws_instance" "frontend" {
+  count = 2
   ami           = var.ami_id
   instance_type = "t2.micro"
   subnet_id     = var.public_subnet_ids[0]
@@ -19,7 +20,7 @@ resource "aws_instance" "frontend" {
  
 
   tags = {
-    Name = "Frontend Server"
+    Name = "Frontend Server ${count.index + 1}"
   }
 
   user_data = <<-EOF
