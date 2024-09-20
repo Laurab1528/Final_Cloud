@@ -25,12 +25,12 @@ module "load_balancer" {
   source               = "./modules/load_balancer"
   vpc_id               = module.networking.vpc_id
   public_subnet_ids    = module.networking.public_subnet_ids
-  private_subnet_ids  =  module.networking.private_subnet_ids
+  private_subnet_ids   = module.networking.private_subnet_ids
   frontend_instance_id = module.compute.frontend_instance_id
   backend_instance_id  = module.compute.backend_instance_id
   lb_internal          = var.lb_internal
-  backend_port     = var.backend_port
-  frontend_port       = var.frontend_port
+  backend_port         = var.backend_port
+  frontend_port        = var.frontend_port
 }
 
 module "compute" {
@@ -43,13 +43,19 @@ module "compute" {
   frontend_sg_id     = module.networking.frontend_sg_id
   backend_sg_id      = module.networking.backend_sg_id
   public_key         = var.public_key
+  db_password        = var.db_password
+  db_username        = var.db_username
+  backend_dns = module.load_balancer.backend_url
+  db_host = module.database.db_endpoint
+
+
 
 }
 
 
 module "database" {
   source               = "./modules/database"
-  subnet_ids = module.networking.private_subnet_ids
+  subnet_ids           = module.networking.private_subnet_ids
   vpc_id               = module.networking.vpc_id
   db_username          = var.db_username
   db_password          = var.db_password
@@ -68,11 +74,13 @@ resource "local_file" "ansible_inventory" {
   content = templatefile("${path.module}/template/inventory.tpl",
     {
       bastion_ip  = module.compute.bastion_public_ip,
-      frontend_ip = module.compute.frontend_public_ip,
+      frontend_ip = module.compute.frontend_public_ip[0],
       backend_ip  = module.compute.backend_private_ip
     }
   )
 }
+
+
 
 module "networking" {
   source               = "./modules/networking"

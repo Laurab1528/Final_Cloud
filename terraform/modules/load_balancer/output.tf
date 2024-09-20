@@ -3,5 +3,5 @@ output "frontend_url" {
 }
 
 output "backend_url" {
-  value = "http://${aws_lb.main.dns_name}:${var.backend_port}"
+  value = "http://${aws_lb.internal.dns_name}:${var.backend_port}"
 }

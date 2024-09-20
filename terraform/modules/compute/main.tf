@@ -24,7 +24,9 @@ resource "aws_instance" "frontend" {
   }
 
   user_data = <<-EOF
-              #!/bin/bash
+              #!/bin/bash              
+              echo export SERVER_PORT="${var.frontend_port}" >> /etc/profile  
+              echo export BACKEND_URL="${var.backend_dns}" >> /etc/profile           
               git clone https://github.com/aljoveza/devops-rampup.git
               cd devops-rampup/frontend
               npm install
@@ -45,6 +47,11 @@ resource "aws_instance" "backend" {
   }
   user_data = <<-EOF
               #!/bin/bash
+              echo export SERVER_PORT="${var.backend_port}" >> /etc/profile
+              echo export DB_HOST="${var.db_host}" >> /etc/profile
+              echo export DB_PASS="${random_password.db_password.result}" >> /etc/profile
+              echo export DB_NAME="${var.db_name}" >> /etc/profile
+              echo export DB_USER="${var.db_username}" >> /etc/profile              
               git clone https://github.com/aljoveza/devops-rampup.git
               cd devops-rampup/backend
               npm install
@@ -86,7 +93,7 @@ resource "aws_cloudwatch_metric_alarm" "high_cpu_utilization" {
   alarm_actions       = [aws_sns_topic.alerts.arn]
 
   dimensions = {
-    InstanceId = aws_instance.frontend.id
+    InstanceId = aws_instance.frontend[0].id 
   }
 }
 

@@ -1,0 +1,14 @@
+{
+    "name": "entrega-final-devops",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "build": "echo 'No hay scripts de build definidos.'"
+      },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "cursor": "^0.1.5"
+    }
+}

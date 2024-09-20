@@ -1,9 +1,9 @@
 output "db_endpoint" {
-  value = aws_db_instance.main.endpoint
+  value = aws_db_instance.internal.address
 }
 
 output "db_name" {
-  value = aws_db_instance.main.name
+  value = aws_db_instance.internal.db_name
 }
 
 output "database_sg_id" {

@@ -3,7 +3,7 @@ output "bastion_public_ip" {
   description = "IP pública del servidor bastion"
 }
 output "frontend_instance_id" {
-  value = aws_instance.frontend.id
+  value = aws_instance.frontend[0].id 
 }
 
 output "backend_instance_id" {

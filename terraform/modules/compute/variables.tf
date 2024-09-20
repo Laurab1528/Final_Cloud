@@ -51,3 +51,49 @@ variable "vpc_id" {
   type        = string
 }
 
+variable "backend_port" {
+  description = "Port on which the load balancer is listening"
+  type        = number
+  default     = 80  // Valor por defecto para el frontend
+}
+
+variable "frontend_port" {
+  description = "Port on which the targets receive traffic"
+  type        = number
+  default     = 80  // Valor por defecto para el backend
+}
+
+variable "db_name" {
+  description = "Name of the database"
+  type        = string
+  default     = "myapp"
+}
+
+
+
+variable "db_password" {
+  description = "Password for the database"
+  type        = string
+}
+
+variable "db_username" {
+  description = "Username for the database"
+  type        = string
+}
+
+resource "random_password" "db_password" {
+  length  = 16
+  special = false
+}
+
+variable "backend_dns" {
+  description = "dns backend"
+  type        = string
+  
+}
+
+variable "db_host" {
+  description = "host"
+  type        = string
+  
+}

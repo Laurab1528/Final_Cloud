@@ -1,5 +1,5 @@
 resource "aws_lb" "main" {
-  name               = "main-lb"
+  name               = "main"
   load_balancer_type = "application"
   security_groups    = [aws_security_group.lb.id]
   subnets            = var.public_subnet_ids
@@ -9,7 +9,7 @@ resource "aws_lb" "main" {
 }
 
 resource "aws_lb" "internal" {
-  name               = "internal-lb"
+  name               = "internal"
   load_balancer_type = "application"
   security_groups    = [aws_security_group.lb.id]
   subnets            = var.private_subnet_ids
@@ -32,7 +32,7 @@ resource "aws_lb_target_group" "backend" {
 }
 
 resource "aws_lb_listener" "frontend" {
-  load_balancer_arn = aws_lb.frontend.arn
+  load_balancer_arn = aws_lb.main.arn
   port     = var.frontend_port
   protocol          = "HTTP"
 
@@ -43,7 +43,7 @@ resource "aws_lb_listener" "frontend" {
 }
 
 resource "aws_lb_listener" "backend" {
-  load_balancer_arn = aws_lb.main.arn
+  load_balancer_arn = aws_lb.internal.arn
   port     = var.backend_port
   protocol          = "HTTP"
 

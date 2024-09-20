@@ -101,3 +101,4 @@ variable "frontend_port" {
   type        = number
   default     = 80  // Valor por defecto para el backend
 }
+
