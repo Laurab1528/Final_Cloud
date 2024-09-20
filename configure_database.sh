@@ -17,22 +17,25 @@
 # # 3. Create the initial tables
 # CREATE TABLE IF NOT EXISTS publications (
 #     id INT AUTO_INCREMENT PRIMARY KEY,
-#     title VARCHAR(255) NOT NULL,
-#     author VARCHAR(255),
-#     published_date DATE
+#     name VARCHAR(250) NOT NULL,
+#     avatar VARCHAR(250)
+#   
 # );
 
 # CREATE TABLE IF NOT EXISTS reviewers (
 #     id INT AUTO_INCREMENT PRIMARY KEY,
 #     name VARCHAR(255) NOT NULL,
-#     email VARCHAR(255) UNIQUE NOT NULL
+#     publication VARCHAR(250) NOT NULL,
+#     avatar VARCHAR(250) UNIQUE NOT NULL
 # );
 
 # CREATE TABLE IF NOT EXISTS movies (
 #     id INT AUTO_INCREMENT PRIMARY KEY,
 #     title VARCHAR(255) NOT NULL,
-#     release_year INT,
-#     genre VARCHAR(100)
+#     release VARCHAR (250)
+#     score INT(11),
+#     publication VARCHAR(250),
+    # reviewers VARCHAR(250),
 # );
 
 # ENDSQL
