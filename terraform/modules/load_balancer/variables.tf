@@ -13,9 +13,9 @@ variable "private_subnet_ids" {
   type        = list(string)
 }
 
-variable "frontend_instance_id" {
+variable "frontend_instances_ids" {
   description = "ID of frontend EC2 instance"
-  type        = string
+  type        = list(string)
 }
 
 variable "backend_instance_id" {

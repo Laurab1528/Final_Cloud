@@ -85,3 +85,17 @@ resource "aws_security_group" "lb" {
   }
 }
 
+
+resource "aws_lb_target_group_attachment" "frontend_instance" {
+  count            = 2
+  target_group_arn = aws_lb_target_group.frontend.arn
+  target_id        = var.frontend_instances_ids[count.index]
+  port             = var.frontend_port
+}
+ 
+resource "aws_lb_target_group_attachment" "backend_instance" {
+  target_group_arn = aws_lb_target_group.backend.arn
+  target_id        = var.backend_instance_id
+  port             = var.backend_port
+}
+ 

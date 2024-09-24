@@ -26,7 +26,7 @@ module "load_balancer" {
   vpc_id               = module.networking.vpc_id
   public_subnet_ids    = module.networking.public_subnet_ids
   private_subnet_ids   = module.networking.private_subnet_ids
-  frontend_instance_id = module.compute.frontend_instance_id
+  frontend_instances_ids = module.compute.frontend_instances_ids
   backend_instance_id  = module.compute.backend_instance_id
   lb_internal          = var.lb_internal
   backend_port         = var.backend_port
