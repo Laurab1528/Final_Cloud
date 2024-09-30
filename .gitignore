@@ -4,6 +4,7 @@
 *.tfstate.*
 terraform.tfvars
 # Ignorar claves SSH
-id_rsa
-id_rsa.pub
+deployer-key
+deployer-key.pub
+rsa.pem
 
